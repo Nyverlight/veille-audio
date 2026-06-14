@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 fetch_news.py
-Recupere les entrees RSS des sources, filtre sur une fenetre temporelle
-(la veille), effectue un dedoublonnage GROSSIER (par lien et par titre
-normalise) et ecrit le resultat dans work/raw_news.json.
+Recupere les entrees RSS des sources, filtre sur une fenetre temporelle,
+effectue un dedoublonnage GROSSIER (par lien et par titre normalise) et ecrit
+le resultat dans work/raw_news.json.
 
-Le tri editorial fin (fusion semantique de sujets identiques, traduction,
-resume) est fait ENSUITE par Claude dans la routine, pas ici.
+Le tri editorial fin (fusion semantique, traduction, resume) est fait ENSUITE
+par Claude dans la routine, pas ici.
 
-Dependances : requests (stdlib uniquement sinon)
-    pip install requests
+Cette version n'utilise que `requests` + la stdlib (xml.etree), sans feedparser,
+pour eviter la dependance fragile sgmllib3k qui ne se compile pas en cloud.
 
 Usage:
     python scripts/fetch_news.py --config config/config.json
@@ -30,7 +30,7 @@ try:
     import requests
 except ImportError:
     print("ERREUR: le module 'requests' n'est pas installe. "
-          "Lancez : pip install requests",
+          "Lancez d'abord setup.sh (ou: pip install requests).",
           file=sys.stderr)
     sys.exit(1)
 
@@ -83,21 +83,16 @@ def _parse_iso(s: str):
 
 
 def parse_date(date_str: str):
-    """
-    Tente de parser une date RSS (RFC 2822) ou Atom (ISO 8601).
-    Retourne un datetime UTC ou None.
-    """
+    """Tente de parser une date RSS (RFC 2822) ou Atom (ISO 8601). UTC ou None."""
     if not date_str:
         return None
     date_str = date_str.strip()
-    # Essai ISO 8601 (Atom)
     try:
         result = _parse_iso(date_str)
         if result:
             return result
     except Exception:
         pass
-    # Essai RFC 2822 (RSS)
     try:
         return parsedate_to_datetime(date_str).astimezone(dt.timezone.utc)
     except Exception:
@@ -109,7 +104,6 @@ def parse_date(date_str: str):
 # Fetch + parse d'un flux RSS 2.0 ou Atom 1.0
 # ---------------------------------------------------------------------------
 
-# Namespaces courants
 _NS = {
     "atom": "http://www.w3.org/2005/Atom",
     "dc":   "http://purl.org/dc/elements/1.1/",
@@ -118,7 +112,6 @@ _NS = {
 
 
 def _text(el, *paths):
-    """Cherche le premier path qui retourne un texte non vide."""
     for path in paths:
         node = el.find(path, _NS)
         if node is not None and node.text:
@@ -127,28 +120,30 @@ def _text(el, *paths):
 
 
 def parse_rss_feed(xml_bytes: bytes, url: str) -> dict:
-    """
-    Parse un flux RSS 2.0 ou Atom 1.0 depuis des bytes bruts.
-    Retourne {"title": str, "entries": [{"title","link","published","summary"}]}.
-    """
+    """Parse un flux RSS 2.0 ou Atom 1.0. Retourne {title, entries:[...]}."""
     try:
         root = ET.fromstring(xml_bytes)
     except ET.ParseError as e:
         raise ValueError(f"XML invalide : {e}")
 
-    tag = root.tag  # peut contenir un namespace ex. {http://...}feed
+    tag = root.tag
 
     # --- Atom ---
     if "feed" in tag:
         feed_title = _text(root, "atom:title", "title") or url
         entries = []
-        for entry in root.findall("atom:entry", _NS) or root.findall("entry"):
+        atom_entries = root.findall("atom:entry", _NS)
+        if not atom_entries:
+            atom_entries = root.findall("entry")
+        for entry in atom_entries:
             title = _text(entry, "atom:title", "title")
             if not title:
                 continue
-            # Lien : href de <link rel="alternate"> ou premier <link>
             link = ""
-            for lk in entry.findall("atom:link", _NS) or entry.findall("link"):
+            links = entry.findall("atom:link", _NS)
+            if not links:
+                links = entry.findall("link")
+            for lk in links:
                 rel = lk.get("rel", "alternate")
                 if rel in ("alternate", ""):
                     link = lk.get("href", "")
@@ -165,27 +160,24 @@ def parse_rss_feed(xml_bytes: bytes, url: str) -> dict:
             })
         return {"title": feed_title, "entries": entries}
 
-    # --- RSS 2.0 (root = <rss> ou <rdf:RDF>) ---
+    # --- RSS 2.0 / RDF ---
     channel = root.find("channel")
     if channel is None:
-        # Essai RDF/RSS 1.0
         channel = root
     feed_title = _text(channel, "title") or url
     entries = []
-    # items peuvent etre dans channel ou au niveau root (RSS 1.0)
-    item_iter = list(channel.findall("item")) or list(root.findall("item"))
+    item_iter = list(channel.findall("item"))
+    if not item_iter:
+        item_iter = list(root.findall("item"))
     for item in item_iter:
         title = _text(item, "title")
         if not title:
             continue
         link = _text(item, "link", "dc:identifier")
-        # <link> en RSS est parfois du texte CDATA sans balise fermante —
-        # ET le lit comme tail ; on essaie aussi le tail de <link>
         if not link:
             lk_el = item.find("link")
             if lk_el is not None:
-                link = (lk_el.text or "") + (lk_el.tail or "")
-                link = link.strip()
+                link = ((lk_el.text or "") + (lk_el.tail or "")).strip()
         published = _text(item, "pubDate", "dc:date", "published")
         summary = _text(item, "description", "content:encoded", "summary")
         entries.append({
@@ -198,11 +190,9 @@ def parse_rss_feed(xml_bytes: bytes, url: str) -> dict:
 
 
 def fetch_feed(url: str, timeout: int = 15) -> dict:
-    """Telecharge et parse un flux. Leve une exception en cas d'echec."""
     headers = {
         "User-Agent": (
-            "Mozilla/5.0 (compatible; fetch_news/2.0; "
-            "+https://github.com/your-repo)"
+            "Mozilla/5.0 (compatible; fetch_news/3.0; +https://github.com/)"
         )
     }
     resp = requests.get(url, headers=headers, timeout=timeout)
@@ -227,7 +217,6 @@ def main():
     now = dt.datetime.now(dt.timezone.utc)
     cutoff = now - dt.timedelta(hours=lookback_hours)
 
-    # Lecture des sources
     sources = []
     for line in sources_file.read_text(encoding="utf-8").splitlines():
         line = line.strip()
@@ -237,6 +226,7 @@ def main():
     seen_links: set = set()
     seen_titles: set = set()
     items = []
+    ok_feeds, empty_feeds, failed_feeds = [], [], []
 
     print(f"=== Recuperation de {len(sources)} flux "
           f"(fenetre: {lookback_hours}h) ===")
@@ -246,23 +236,19 @@ def main():
             feed = fetch_feed(url)
         except Exception as e:
             print(f"  [ECHEC] {url} -> {e}")
+            failed_feeds.append(url)
             continue
 
         source_name = feed["title"]
         kept = 0
-
         for e in feed["entries"]:
             when = parse_date(e["published"])
-
-            # On garde si recent, ou si date inconnue (on prefere ne pas perdre)
             if when is not None and when < cutoff:
                 continue
-
             link = e["link"]
             title = e["title"]
             if not title:
                 continue
-
             norm = normalize_title(title)
             if link and link in seen_links:
                 continue
@@ -270,7 +256,6 @@ def main():
                 continue
             seen_links.add(link)
             seen_titles.add(norm)
-
             items.append({
                 "title": title,
                 "link": link,
@@ -281,8 +266,8 @@ def main():
             kept += 1
 
         print(f"  [OK]    {source_name}: {kept} item(s) retenu(s)")
+        (ok_feeds if kept else empty_feeds).append(source_name)
 
-    # Tri par date (les plus recents d'abord), inconnus a la fin
     items.sort(key=lambda x: x["published"] or "", reverse=True)
     items = items[:max_items]
 
@@ -291,11 +276,21 @@ def main():
     out.write_text(json.dumps(items, ensure_ascii=False, indent=2),
                    encoding="utf-8")
 
-    print(f"=== {len(items)} actualite(s) ecrite(s) dans {out} ===")
+    # --- Rapport de sante des flux (facilite le diagnostic) ---
+    print("\n=== Sante des flux ===")
+    print(f"  Avec items : {len(ok_feeds)}")
+    print(f"  Joignables mais vides : {len(empty_feeds)}")
+    print(f"  En echec (reseau/URL) : {len(failed_feeds)}")
+    if failed_feeds:
+        print("  -> Flux en echec a verifier (allow-list reseau ou URL morte) :")
+        for u in failed_feeds:
+            print(f"       {u}")
+
+    print(f"\n=== {len(items)} actualite(s) ecrite(s) dans {out} ===")
     if not items:
         print("ATTENTION: aucune actualite recuperee. "
               "Verifiez l'acces reseau aux domaines des flux, "
-              "et la validite des URLs dans sources_ia.txt.")
+              "et la validite des URLs dans le fichier de sources.")
 
 
 if __name__ == "__main__":
