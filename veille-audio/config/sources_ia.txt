@@ -1,4 +1,4 @@
-# Sources RSS - domaine Intelligence artificielle
+# Sources RSS - Intelligence artificielle (mis à jour juin 2026)
 # Une URL par ligne. Lignes vides et lignes commencant par # ignorees.
 # IMPORTANT : ces URLs sont un point de depart. Certaines peuvent avoir change.
 # Le script fetch_news.py affiche, a chaque execution, les flux qui repondent
@@ -10,6 +10,9 @@ https://www.actuia.com/feed/
 https://siecledigital.fr/category/intelligence-artificielle/feed/
 https://www.numerama.com/tag/intelligence-artificielle/feed/
 https://www.lebigdata.fr/feed
+https://www.01net.com/actualites/intelligence-artificielle/feed/
+https://www.blogdumoderateur.com/ia/feed/
+https://www.clubic.com/feed/technologies-d-avenir/intelligence-artificielle/rss
 
 # ---- Sources anglophones ----
 https://techcrunch.com/category/artificial-intelligence/feed/
@@ -17,8 +20,12 @@ https://venturebeat.com/category/ai/feed/
 https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
 https://www.technologyreview.com/topic/artificial-intelligence/feed/
 https://arstechnica.com/ai/feed/
+https://thegradient.pub/rss/
+https://importai.substack.com/feed
 
-# ---- Sources "primaires" (labos / acteurs) ----
+# ---- Sources primaires (labos / acteurs) ----
 https://openai.com/news/rss.xml
 https://www.anthropic.com/news/rss.xml
 https://huggingface.co/blog/feed.xml
+https://deepmind.google/blog/rss.xml
+https://ai.meta.com/blog/rss/
