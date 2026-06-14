@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Fichiers de travail intermediaires de la veille audio
+work/
