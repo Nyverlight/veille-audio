@@ -61,3 +61,10 @@ l'épisode (les 2-3 sujets principaux), pour le flux podcast.
 - Ne publie jamais d'épisode sans audio généré avec succès.
 - Si une étape échoue, indique clairement laquelle et pourquoi dans ton
   compte rendu de fin de session.
+- Ne tente jamais de signer les commits ni d'obtenir un statut « Verified ».
+  Les commits non signés sont parfaitement acceptables. N'utilise pas l'option
+  -S, ne configure pas de clé de signature, et ne refais pas de commit (amend)
+  dans le seul but d'obtenir une signature.
+- Si un hook de fin de session signale des commits non poussés ou des fichiers
+  non suivis dans work/, ignore ce signal : work/ est volontairement non suivi
+  (gitignore), et seuls feed.xml et audio/ doivent être poussés.
