@@ -3,7 +3,7 @@
   "domain_slug": "ia",
   "sources_file": "config/sources_ia.txt",
 
-  "voice": "fr-FR-DeniseNeural",
+  "voice": "fr-FR-HenriNeural",
   "rate": "+0%",
 
   "lookback_hours": 30,
@@ -15,5 +15,5 @@
   "feed_language": "fr-FR",
 
   "base_url": "https://VOTRE-USER.github.io/veille-audio",
-  "keep_episodes": 14
+  "keep_episodes": 30
 }
