@@ -46,6 +46,16 @@ except ImportError:
           file=sys.stderr)
     sys.exit(1)
 
+# curl_cffi imite l'empreinte TLS/JA3 d'un vrai navigateur : INDISPENSABLE
+# pour les flux derriere une protection anti-bot (Cloudflare/DataDome) qui
+# renvoient 403 a requests meme avec un parfait User-Agent (The Verge,
+# Ars Technica, 01net, siecledigital...). Si absent, on retombe sur requests.
+try:
+    from curl_cffi import requests as cffi_requests
+    _HAS_CFFI = True
+except ImportError:
+    _HAS_CFFI = False
+
 
 # ---------------------------------------------------------------------------
 # En-tetes "navigateur" : indispensable pour ne pas etre rejete (403) par les
@@ -229,14 +239,51 @@ def parse_rss_feed(xml_bytes: bytes, url: str) -> dict:
     return {"title": feed_title, "entries": entries}
 
 
-def fetch_feed(url: str, timeout: int = 15) -> dict:
+# Profils de navigateurs a imiter (empreinte TLS + en-tetes coherents). On en
+# essaie plusieurs car un WAF qui bloque Chrome laisse parfois passer Safari
+# ou Firefox. NE PAS forcer d'en-tete User-Agent ici : curl_cffi pose lui-meme
+# un jeu d'en-tetes coherent avec l'empreinte TLS choisie (un UA "Chrome" sur
+# une empreinte "Firefox" est justement ce que les anti-bots detectent).
+_IMPERSONATE_PROFILES = ["chrome", "safari170", "firefox133", "edge101"]
+
+
+def fetch_feed(url: str, timeout: int = 20) -> dict:
     """
-    Telecharge le flux avec un User-Agent navigateur (contre les 403) puis le
-    parse via la stdlib. Leve une exception en cas d'echec HTTP/reseau.
+    Telecharge le flux en imitant l'empreinte TLS d'un vrai navigateur
+    (curl_cffi) -> contourne les 403 anti-bot (Cloudflare/DataDome) que
+    requests ne peut pas passer, meme avec un bon User-Agent.
+    Repli sur requests si curl_cffi est indisponible ou epuise.
+    Leve une exception en cas d'echec definitif.
     """
-    resp = requests.get(url, headers=BROWSER_HEADERS, timeout=timeout)
-    resp.raise_for_status()
-    return parse_rss_feed(resp.content, url)
+    last_err = None
+
+    if _HAS_CFFI:
+        for profile in _IMPERSONATE_PROFILES:
+            try:
+                resp = cffi_requests.get(url, impersonate=profile,
+                                         timeout=timeout)
+            except Exception as e:
+                last_err = f"{type(e).__name__}: {e}"
+                continue
+            if resp.status_code == 200:
+                return parse_rss_feed(resp.content, url)
+            last_err = f"HTTP {resp.status_code}"
+            # 403/429/503 = anti-bot ou limite de debit -> un autre profil
+            # peut passer. Tout autre code (404, 410, 500...) ne sera pas
+            # resolu par un changement de profil : on arrete la boucle.
+            if resp.status_code not in (403, 429, 503):
+                break
+
+    # Repli requests (curl_cffi absent, ou flux sans protection qui aurait
+    # rejete les profils ci-dessus pour une autre raison).
+    try:
+        resp = requests.get(url, headers=BROWSER_HEADERS, timeout=timeout)
+        resp.raise_for_status()
+        return parse_rss_feed(resp.content, url)
+    except Exception as e:
+        if last_err:
+            raise RuntimeError(f"{last_err} (repli requests: {e})")
+        raise
 
 
 # ---------------------------------------------------------------------------
