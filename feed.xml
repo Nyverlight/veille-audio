@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-15</title>
+      <description>Anthropic suspend Fable 5 et Mythos sur ordre de Washington, Microsoft serre la bride au tokenmaxxing, et Meta démantèle son accord Manus sous la pression de Pékin.</description>
+      <guid>https://nyverlight.github.io/veille-audio/audio/ia-2026-06-15.mp3</guid>
+      <pubDate>Mon, 15 Jun 2026 02:07:13 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio/audio/ia-2026-06-15.mp3" length="1894176" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-14</title>
       <description>Anthropic suspend deux modèles sur fond d'alerte d'Amazon, Meta défait son accord Manus sous pression de Pékin, et OpenAI visée par une enquête de procureurs américains.</description>
       <guid>https://nyverlight.github.io/veille-audio/audio/ia-2026-06-14.mp3</guid>
