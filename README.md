@@ -13,7 +13,7 @@ la diffusion passent par un dépôt GitHub + GitHub Pages (gratuits).
 2. Récupère les actualités IA des dernières ~30 h depuis vos flux RSS
    (`fetch_news.py`), avec un dédoublonnage grossier.
 3. **Claude lui-même** fusionne les doublons restants, traduit l'anglais,
-   trie, et rédige un script parlé en français (c'est là qu'est la qualité).
+   trie, et rédige un script parlé en français.
 4. Transforme ce script en MP3 avec une voix neuronale française
    (`make_audio.py` / edge-tts, gratuit).
 5. Met à jour le flux podcast `feed.xml` et applique une rétention
@@ -27,9 +27,7 @@ Vous, le matin : vous ouvrez votre app podcast, l'épisode du jour est là.
 ## B. Prérequis
 
 - **Un plan Claude payant** (Pro suffit) avec accès à Claude Code sur le web
-  (`claude.ai/code`). Les Routines sont en *recherche preview* : l'interface
-  exacte peut évoluer, vérifiez la doc officielle au moment de la mise en place
-  (https://code.claude.com/docs/en/claude-code-on-the-web).
+  (`claude.ai/code`).
 - **Un compte GitHub** (gratuit).
 - C'est tout. Aucune installation sur votre machine n'est nécessaire.
 
@@ -37,13 +35,13 @@ Vous, le matin : vous ouvrez votre app podcast, l'épisode du jour est là.
 
 ## C. Étape 1 — Créer le dépôt et y déposer le kit
 
-1. Sur GitHub, créez un dépôt **public** nommé `veille-audio`.
+1. Sur GitHub, créez un dépôt **public** nommé `veille-audio-IA`.
    (Public = GitHub Pages gratuit. Le contenu n'est que du résumé d'actu IA ;
    l'URL reste de fait « non listée ». Si vous voulez un dépôt privé, Pages
    nécessite un plan GitHub payant — voir la section Dépannage.)
 2. Déposez-y tous les fichiers de ce kit, en conservant l'arborescence :
    ```
-   veille-audio/
+   veille-audio-IA/
      config/config.json
      config/sources_ia.txt
      scripts/fetch_news.py
@@ -66,7 +64,7 @@ Vous, le matin : vous ouvrez votre app podcast, l'épisode du jour est là.
 1. Dépôt → **Settings** → **Pages**.
 2. Source : **Deploy from a branch**, branche **main**, dossier **/(root)**.
 3. Enregistrez. GitHub affiche l'URL de votre site, du type
-   `https://VOTRE-USER.github.io/veille-audio`.
+   `https://VOTRE-USER.github.io/veille-audio-IA`.
 4. Ouvrez `config/config.json` et remplacez la valeur de `base_url` par cette
    URL **exacte** (sans slash final).
 
@@ -105,12 +103,11 @@ Dans `config/sources_ia.txt` : ajoutez/retirez des flux RSS. Le premier test
 
 Allez sur `claude.ai/code/routines` → **Create**.
 
-1. **Dépôt** : sélectionnez votre dépôt `veille-audio`.
+1. **Dépôt** : sélectionnez votre dépôt `veille-audio-IA`.
 2. **Pushes de branche** : activez **« Allow unrestricted branch pushes »**
    pour ce dépôt, afin que la routine puisse commiter sur `main` (que Pages
    sert). Sans cela, Claude ne pousse que sur des branches `claude/...`.
-3. **Modèle** : choisissez **Opus** (qualité du tri éditorial). Mettez l'effort
-   sur élevé si l'option est proposée.
+3. **Modèle** : choisissez **Opus** (qualité du tri éditorial).
 4. **Environnement réseau** — étape critique. Le bac à sable a un accès réseau
    restreint ; autorisez explicitement :
    - `pypi.org`, `files.pythonhosted.org` (installation des dépendances),
@@ -155,7 +152,7 @@ Lancez la routine manuellement avec **Run now**, puis vérifiez, dans l'ordre :
 
 ## I. Étape 7 — S'abonner dans l'app podcast
 
-1. Vérifiez que `https://VOTRE-USER.github.io/veille-audio/feed.xml` s'ouvre
+1. Vérifiez que `https://VOTRE-USER.github.io/veille-audio-IA/feed.xml` s'ouvre
    bien dans un navigateur (XML affiché).
 2. Dans votre app podcast (Pocket Casts, Apple Podcasts, AntennaPod, etc.) :
    « Ajouter par URL » / « Add by URL » → collez l'URL du `feed.xml`.
