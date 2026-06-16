@@ -3,7 +3,7 @@
   "domain_slug": "ia",
   "sources_file": "config/sources_ia.txt",
 
-  "voice": "fr-FR-HenriNeural",
+  "voice": "fr-FR-RemyMultilingualNeural",
   "rate": "+0%",
 
   "lookback_hours": 30,
