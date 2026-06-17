@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-17</title>
+      <description>Suspension mondiale de Fable 5 et Mythos 5 d'Anthropic, l'entrée en Bourse de SpaceX et son rachat de Cursor, et la révision de la loi européenne sur l'IA.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-17.mp3</guid>
+      <pubDate>Wed, 17 Jun 2026 04:09:20 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-17.mp3" length="2065680" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-16</title>
       <description>Washington force Anthropic à couper Fable 5 et Mythos 5, enquête de 42 États sur OpenAI, et Salesforce rachète Fin pour 3,6 milliards de dollars.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-16.mp3</guid>
