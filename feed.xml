@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-19</title>
+      <description>Fracture géopolitique sur l'IA entre le G7, les États-Unis et la Chine, recrutements stratégiques d'OpenAI avant son entrée en bourse, et plainte d'actionnaires contre Microsoft sur ses dépenses en IA.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-19.mp3</guid>
+      <pubDate>Fri, 19 Jun 2026 04:07:27 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-19.mp3" length="2236608" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-18</title>
       <description>La souveraineté de l'IA au cœur du G7 après la coupure d'Anthropic, la levée géante de 7 milliards de DeepSeek, et les finances vertigineuses d'OpenAI avant son entrée en Bourse.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-18.mp3</guid>
