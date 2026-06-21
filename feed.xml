@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-21</title>
+      <description>Les États-Unis bloquent les modèles Fable 5 et Mythos 5 d'Anthropic, OpenAI et Anthropic déposent des dossiers d'introduction en Bourse, et OVHcloud négocie le rachat de Gladia.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-21.mp3</guid>
+      <pubDate>Sun, 21 Jun 2026 04:07:44 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-21.mp3" length="1997280" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-20</title>
       <description>Les États-Unis forcent Anthropic à suspendre Fable 5 et Mythos 5, OVHcloud rachète Gladia pour un cloud vocal souverain, et OpenAI comme Anthropic préparent leur entrée en bourse.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-20.mp3</guid>
