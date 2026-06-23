@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-23</title>
+      <description>OpenAI lance Daybreak pour sécuriser l'open source, Google DeepMind s'allie à A24 pour le cinéma, et les licenciements tech liés à l'IA se multiplient.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-23.mp3</guid>
+      <pubDate>Tue, 23 Jun 2026 04:08:49 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-23.mp3" length="2374128" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-22</title>
       <description>Pressions politiques sur Anthropic aux États-Unis, déploiement massif de ChatGPT et Codex chez Samsung, et le choix d'Amazon d'automatiser la supervision de ses agents IA.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-22.mp3</guid>
