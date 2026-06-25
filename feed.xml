@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-25</title>
+      <description>OpenAI dévoile sa première puce Jalapeño avec Broadcom, Qualcomm rachète Modular, et Anthropic lance l'agent proactif Claude Tag sur Slack.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-25.mp3</guid>
+      <pubDate>Thu, 25 Jun 2026 04:07:10 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-25.mp3" length="2024784" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-24</title>
       <description>Mythos d'Anthropic révèle une faille vieille de 30 ans, le compte à rebours de l'AI Act vers le 2 août, et la vague de licenciements liés à l'IA chez Oracle.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-24.mp3</guid>
