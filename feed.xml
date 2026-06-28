@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-28</title>
+      <description>Le retour partiel de Mythos 5 d'Anthropic et l'essor des alternatives asiatiques, une faille de sécurité visant les agents de code IA, et le départ d'un cadre du Vision Pro vers OpenAI.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-28.mp3</guid>
+      <pubDate>Sun, 28 Jun 2026 04:06:38 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-28.mp3" length="1669392" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-26</title>
       <description>OpenAI retarde GPT-5.6 à la demande de la Maison-Blanche, Anthropic accuse Alibaba de la plus grande attaque par distillation contre Claude, et OpenAI dévoile avec Broadcom sa puce d'inférence Jalapeño.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-26.mp3</guid>
