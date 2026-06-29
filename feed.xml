@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-29</title>
+      <description>Lancement de GPT-5.6 chez OpenAI, le modèle chinois GLM 5.2 qui comble l'écart en cybersécurité, et Ford qui réembauche ses ingénieurs vétérans face aux limites de l'IA.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-29.mp3</guid>
+      <pubDate>Mon, 29 Jun 2026 04:07:05 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-29.mp3" length="1985328" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-26</title>
       <description>OpenAI retarde GPT-5.6 à la demande de la Maison-Blanche, Anthropic accuse Alibaba de la plus grande attaque par distillation contre Claude, et OpenAI dévoile avec Broadcom sa puce d'inférence Jalapeño.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-26.mp3</guid>
