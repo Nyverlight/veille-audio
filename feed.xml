@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-06-30</title>
+      <description>OpenAI dévoile GPT-5.6 sous contrôle de la Maison-Blanche, Anthropic se rapproche de la Californie face à Washington, et la Corée du Sud investit massivement pour contrer la pénurie de mémoire.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-30.mp3</guid>
+      <pubDate>Tue, 30 Jun 2026 04:08:43 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-30.mp3" length="1947168" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-29</title>
       <description>Lancement de GPT-5.6 chez OpenAI, le modèle chinois GLM 5.2 qui comble l'écart en cybersécurité, et Ford qui réembauche ses ingénieurs vétérans face aux limites de l'IA.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-29.mp3</guid>
