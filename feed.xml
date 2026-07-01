@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-07-01</title>
+      <description>Anthropic relance Fable 5 et dévoile Claude Sonnet 5 et Claude Science, Google lance son générateur d'images Nano Banana 2 Lite, et OpenClaw débarque sur mobile dans la douleur.</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-07-01.mp3</guid>
+      <pubDate>Wed, 01 Jul 2026 04:07:37 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-07-01.mp3" length="2149344" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-29</title>
       <description>Lancement de GPT-5.6 chez OpenAI, le modèle chinois GLM 5.2 qui comble l'écart en cybersécurité, et Ford qui réembauche ses ingénieurs vétérans face aux limites de l'IA.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-29.mp3</guid>
