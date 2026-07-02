@@ -8,6 +8,13 @@
     <itunes:author>Veille Audio</itunes:author>
     <itunes:image href="https://nyverlight.github.io/veille-audio-IA/cover.jpg" />
     <item>
+      <title>Veille IA - 2026-07-02</title>
+      <description>Retour mondial de Claude Fable 5 et Mythos 5 et lancement de Sonnet 5 chez Anthropic, scandale des livres détruits pour l'entraînement, et la CIA qualifie l'IA d'« armes nucléaires numériques ».</description>
+      <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-07-02.mp3</guid>
+      <pubDate>Thu, 02 Jul 2026 04:08:25 +0000</pubDate>
+      <enclosure url="https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-07-02.mp3" length="2063088" type="audio/mpeg" />
+    </item>
+    <item>
       <title>Veille IA - 2026-06-29</title>
       <description>Lancement de GPT-5.6 chez OpenAI, le modèle chinois GLM 5.2 qui comble l'écart en cybersécurité, et Ford qui réembauche ses ingénieurs vétérans face aux limites de l'IA.</description>
       <guid>https://nyverlight.github.io/veille-audio-IA/audio/ia-2026-06-29.mp3</guid>
